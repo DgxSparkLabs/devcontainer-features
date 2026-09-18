@@ -7,7 +7,7 @@ Installs the HashiCorp Vault binary.
 
 ```json
 "features": {
-    "ghcr.io/roul/devcontainer-features/vault:1": {}
+    "ghcr.io/DgxSparkLabs/devcontainer-features/vault:1": {}
 }
 ```
 
@@ -21,4 +21,4 @@ Installs the HashiCorp Vault binary.
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/RouL/devcontainer-features/blob/main/src/vault/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/DgxSparkLabs/devcontainer-features/blob/main/src/vault/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

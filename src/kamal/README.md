@@ -7,7 +7,7 @@ Installs Kamal Deploy directly via rubygems.
 
 ```json
 "features": {
-    "ghcr.io/roul/devcontainer-features/kamal:1": {}
+    "ghcr.io/DgxSparkLabs/devcontainer-features/kamal:1": {}
 }
 ```
 
@@ -21,4 +21,4 @@ Installs Kamal Deploy directly via rubygems.
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/RouL/devcontainer-features/blob/main/src/kamal/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/DgxSparkLabs/devcontainer-features/blob/main/src/kamal/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
