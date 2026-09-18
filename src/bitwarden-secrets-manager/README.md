@@ -7,7 +7,7 @@ Installs the bitwarden secrets manager CLI (bws) and optionally configures it to
 
 ```json
 "features": {
-    "ghcr.io/roul/devcontainer-features/bitwarden-secrets-manager:1": {}
+    "ghcr.io/DgxSparkLabs/devcontainer-features/bitwarden-secrets-manager:1": {}
 }
 ```
 
@@ -23,4 +23,4 @@ Installs the bitwarden secrets manager CLI (bws) and optionally configures it to
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/RouL/devcontainer-features/blob/main/src/bitwarden-secrets-manager/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/DgxSparkLabs/devcontainer-features/blob/main/src/bitwarden-secrets-manager/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._

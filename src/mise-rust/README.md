@@ -7,7 +7,7 @@ Installs Rust via mise-en-place version manager.
 
 ```json
 "features": {
-    "ghcr.io/roul/devcontainer-features/mise-rust:1": {}
+    "ghcr.io/DgxSparkLabs/devcontainer-features/mise-rust:1": {}
 }
 ```
 
@@ -22,4 +22,4 @@ Installs Rust via mise-en-place version manager.
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/RouL/devcontainer-features/blob/main/src/mise-rust/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/DgxSparkLabs/devcontainer-features/blob/main/src/mise-rust/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
