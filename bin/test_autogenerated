@@ -8,9 +8,7 @@ SCRIPT_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 BASE_PATH=$( cd -- "$( dirname -- "${SCRIPT_PATH}" )" &> /dev/null && pwd )
 
 BASE_IMAGE_DEFAULT="mcr.microsoft.com/devcontainers/base:ubuntu"
-BASE_IMAGES='{
-    "kamal": "mcr.microsoft.com/devcontainers/ruby:latest"
-}'
+BASE_IMAGES='{}'
 
 error() {
     echo "ERROR: $@"
