@@ -19,6 +19,11 @@ Installs the bitwarden secrets manager CLI (bws) and optionally configures it to
 | server_api | Provides an API URL that differs from the default (if in doubt, leave it empty!). | string | - |
 | server_identity | Provides an identity URL that differs from the default (if in doubt, leave it empty!). | string | - |
 
+## Attribution
+
+This Feature was originally created by [Markus Zhang](https://github.com/RouL)
+as part of [RouL/devcontainer-features](https://github.com/RouL/devcontainer-features),
+and is redistributed here under the MIT License.
 
 
 ---

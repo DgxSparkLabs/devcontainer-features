@@ -1,15 +1,13 @@
 # Contributing code
 
-This repository is a collection of dev container Features managed by [DgxSparkLabs].
-This repository will **only accept improvements and
-bug fixes** for the [current set of maintained Features].
+This repository is a collection of dev container Features maintained by [DgxSparkLabs].
+It accepts improvements and bug fixes for the [current set of maintained Features], and it
+also aggregates Features authored by others, redistributed with full credit to their
+original creators.
 
-If you're looking to create a new Feature, then I'd encourage adding it to a
-separate repository of your control. The [devcontainers/feature-starter]
-repository has more guidance on self authoring Features.
-
-Once you've self authored the Features and if you'd like to share them with
-the community, I'd recommend [adding it to the index].
+Every Feature keeps the copyright and license of its original author. When a Feature comes
+from someone else, its original license and copyright notice are preserved, its author is
+credited in `src/<feature>/NOTES.md`, and it is recorded in [ATTRIBUTIONS.md].
 
 If you've identified an issue and you want to fix it, here's how you can get
 started:
@@ -23,8 +21,19 @@ started:
 7. Commit & push your changes
 8. Open a PR to get your changes merged
 
+## Adding a Feature from Another Author
+
+We welcome Features created by others. To add one while respecting its license:
+
+1. Copy the Feature into `src/<feature>/` with its `devcontainer-feature.json` and `install.sh`
+2. Preserve the original author's copyright notice and license text with the Feature
+3. Credit the author in `src/<feature>/NOTES.md` under an `## Attribution` heading
+4. Add a row for the Feature to [ATTRIBUTIONS.md]
+5. Add tests under `test/<feature>/` and open a PR
+
 [DgxSparkLabs]: https://github.com/DgxSparkLabs
 [current set of maintained Features]: https://github.com/DgxSparkLabs/devcontainer-features/tree/main/src
 [devcontainers/feature-starter]: https://github.com/devcontainers/feature-starter#readme
 [adding it to the index]: https://github.com/devcontainers/feature-starter#adding-features-to-the-index
 [semver]: https://semver.org/
+[ATTRIBUTIONS.md]: ./ATTRIBUTIONS.md

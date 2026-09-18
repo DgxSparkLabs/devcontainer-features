@@ -17,6 +17,11 @@ Installs the HashiCorp Vault binary.
 |-----|-----|-----|-----|
 | version | Provides the version to be installed. Defaults to newest available version. | string | - |
 
+## Attribution
+
+This Feature was originally created by [Markus Zhang](https://github.com/RouL)
+as part of [RouL/devcontainer-features](https://github.com/RouL/devcontainer-features),
+and is redistributed here under the MIT License.
 
 
 ---

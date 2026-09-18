@@ -24,6 +24,11 @@ Installs the bitwarden CLI (bw) and optionally configures it to use a self-hoste
 | events | Provides a custom events URL that differs from the base URL. | string | - |
 | key_connector | Provides the URL for your Key Connector server. | string | - |
 
+## Attribution
+
+This Feature was originally created by [Markus Zhang](https://github.com/RouL)
+as part of [RouL/devcontainer-features](https://github.com/RouL/devcontainer-features),
+and is redistributed here under the MIT License.
 
 
 ---
