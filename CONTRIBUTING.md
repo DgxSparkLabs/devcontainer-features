@@ -1,6 +1,6 @@
 # Contributing code
 
-This repository is a collection of dev container Features managed by [Markus Zhang].
+This repository is a collection of dev container Features managed by [DgxSparkLabs].
 This repository will **only accept improvements and
 bug fixes** for the [current set of maintained Features].
 
@@ -23,8 +23,8 @@ started:
 7. Commit & push your changes
 8. Open a PR to get your changes merged
 
-[Markus Zhang]: https://github.com/RouL
-[current set of maintained Features]: https://github.com/RouL/devcontainer-features/tree/main/src
+[DgxSparkLabs]: https://github.com/DgxSparkLabs
+[current set of maintained Features]: https://github.com/DgxSparkLabs/devcontainer-features/tree/main/src
 [devcontainers/feature-starter]: https://github.com/devcontainers/feature-starter#readme
 [adding it to the index]: https://github.com/devcontainers/feature-starter#adding-features-to-the-index
 [semver]: https://semver.org/

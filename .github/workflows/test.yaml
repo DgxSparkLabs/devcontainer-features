@@ -17,13 +17,6 @@ jobs:
           - bitwarden-cli
           - bitwarden-secrets-manager
           - mise
-          - mise-bun
-          - mise-golang
-          - mise-java
-          - mise-node
-          - mise-python
-          - mise-ruby
-          - mise-rust
           - vault
         baseImage:
           - debian:latest
@@ -69,13 +62,6 @@ jobs:
           - bitwarden-secrets-manager
           - kamal
           - mise
-          - mise-bun
-          - mise-golang
-          - mise-java
-          - mise-node
-          - mise-python
-          - mise-ruby
-          - mise-rust
           - vault
     steps:
       - uses: actions/checkout@v4

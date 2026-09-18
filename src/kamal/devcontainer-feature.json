@@ -5,8 +5,7 @@
   "description": "Installs Kamal Deploy directly via rubygems.",
   "installsAfter": [
     "ghcr.io/devcontainers/features/ruby",
-    "ghcr.io/devcontainers-extra/features/ruby-asdf",
-    "ghcr.io/roul/devcontainer-features/mise-ruby"
+    "ghcr.io/devcontainers-extra/features/ruby-asdf"
   ],
   "options": {
     "version": {

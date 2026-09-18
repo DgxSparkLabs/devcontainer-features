@@ -7,11 +7,11 @@ set -o nounset
 SCRIPT_PATH=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 BASE_PATH=$( cd -- "$( dirname -- "${SCRIPT_PATH}" )" &> /dev/null && pwd )
 
-REPO_OWNER="${REPO_OWNER:-RouL}"
+REPO_OWNER="${REPO_OWNER:-DgxSparkLabs}"
 REPO_NAME="${REPO_NAME:-devcontainer-features}"
 SRC_FOLDER="${SRC_FOLDER:-src}"
 
-NAMESPACE="${REPO_OWNER,,}/${REPO_NAME,,}"
+NAMESPACE="${REPO_OWNER}/${REPO_NAME}"
 
 cd $BASE_PATH
 
