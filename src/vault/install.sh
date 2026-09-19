@@ -45,13 +45,42 @@ arch_detect() {
   fi
 }
 
+github_api_get() {
+    # Resilient GitHub API GET: retries with backoff, validates JSON shape, and
+    # uses GITHUB_TOKEN when present. $1=URL, $2=expected jq type (object|array).
+    _url="$1"
+    _type="$2"
+    _attempt=0
+    while [ "$_attempt" -lt 4 ]; do
+        _attempt=$((_attempt + 1))
+        if [ -n "${GITHUB_TOKEN:-}" ]; then
+            _resp="$(curl -fsSL -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "$_url" 2>/dev/null)" || _resp=""
+        else
+            _resp="$(curl -fsSL -H "Accept: application/vnd.github+json" "$_url" 2>/dev/null)" || _resp=""
+        fi
+        if [ -n "$_resp" ] && printf '%s' "$_resp" | jq -e "type == \"$_type\"" >/dev/null 2>&1; then
+            printf '%s' "$_resp"
+            return 0
+        fi
+        sleep $(( _attempt * 3 + $$ % 4 ))
+    done
+    return 1
+}
+
 export DEBIAN_FRONTEND=noninteractive
+
+if ! command -v apt-get >/dev/null 2>&1; then
+    error "This feature requires a Debian/Ubuntu base image (apt-get not found)."
+fi
 
 check_packages $REQUIRED_PACKAGES
 
-CURRENT_TAG="$(curl -L https://api.github.com/repos/hashicorp/vault/releases/latest | jq --raw-output '.tag_name')"
-CURRENT_VERSION="${CURRENT_TAG#v}"
-VERSION="${VERSION:-$CURRENT_VERSION}"
+if [ -z "${VERSION:-}" ]; then
+    RELEASE_JSON="$(github_api_get "https://api.github.com/repos/hashicorp/vault/releases/latest" object)" \
+        || error "Could not resolve the latest Vault version from the GitHub API (rate limited?). Pin the 'version' option to install a specific release."
+    CURRENT_TAG="$(printf '%s' "$RELEASE_JSON" | jq --raw-output '.tag_name')"
+    VERSION="${CURRENT_TAG#v}"
+fi
 
 arch_detect
 
@@ -86,5 +115,9 @@ install
 # Clean up
 rm -rf /var/lib/apt/lists/*
 rm -rf .gnupg
+
+# Smoke test: fail the build if the binary did not install correctly
+echo "(*) Verifying vault installation..."
+vault version
 
 echo "Done!"

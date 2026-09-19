@@ -1,0 +1,30 @@
+[
+  {
+    "name": "vault-rejects-non-apt",
+    "feature": "vault",
+    "image": "mcr.microsoft.com/devcontainers/base:alpine",
+    "options": {},
+    "expect_log": "requires a Debian/Ubuntu base image"
+  },
+  {
+    "name": "bitwarden-cli-rejects-non-apt",
+    "feature": "bitwarden-cli",
+    "image": "mcr.microsoft.com/devcontainers/base:alpine",
+    "options": {},
+    "expect_log": "requires a Debian/Ubuntu base image"
+  },
+  {
+    "name": "bitwarden-secrets-manager-rejects-non-apt",
+    "feature": "bitwarden-secrets-manager",
+    "image": "mcr.microsoft.com/devcontainers/base:alpine",
+    "options": {},
+    "expect_log": "requires a Debian/Ubuntu base image"
+  },
+  {
+    "name": "mise-rejects-non-apt",
+    "feature": "mise",
+    "image": "fedora:latest",
+    "options": {},
+    "expect_log": "requires a Debian/Ubuntu base image"
+  }
+]
