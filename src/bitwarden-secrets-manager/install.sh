@@ -53,6 +53,10 @@ arch_detect() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+if ! command -v apt-get >/dev/null 2>&1; then
+    error "This feature requires a Debian/Ubuntu base image (apt-get not found)."
+fi
+
 check_packages $REQUIRED_PACKAGES
 
 CURRENT_TAG="$(curl --request GET https://api.github.com/repos/bitwarden/sdk-sm/releases?per_page=100 | jq --raw-output '[.[] | select(.draft == false) | select(.prerelease == false) | select(.tag_name | startswith("bws-")) | .tag_name][0]')"

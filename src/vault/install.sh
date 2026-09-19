@@ -47,6 +47,10 @@ arch_detect() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+if ! command -v apt-get >/dev/null 2>&1; then
+    error "This feature requires a Debian/Ubuntu base image (apt-get not found)."
+fi
+
 check_packages $REQUIRED_PACKAGES
 
 CURRENT_TAG="$(curl -L https://api.github.com/repos/hashicorp/vault/releases/latest | jq --raw-output '.tag_name')"

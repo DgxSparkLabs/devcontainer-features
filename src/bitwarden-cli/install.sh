@@ -31,6 +31,11 @@ check_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+if ! command -v apt-get >/dev/null 2>&1; then
+    echo "This feature requires a Debian/Ubuntu base image (apt-get not found)." >&2
+    exit 1
+fi
+
 check_packages $REQUIRED_PACKAGES
 
 install() {

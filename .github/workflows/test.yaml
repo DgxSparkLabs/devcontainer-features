@@ -137,6 +137,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - id: heavy
+        name: "Detect heavy features in this bin"
+        env:
+          BIN: ${{ matrix.bin }}
+          # Features whose image builds are large enough to need extra runner disk.
+          HEAVY_FEATURES: "mise"
+        run: |
+          heavy=false
+          for f in $(echo "$BIN" | tr ',' ' '); do
+            case ",$HEAVY_FEATURES," in *",$f,"*) heavy=true ;; esac
+          done
+          echo "heavy=$heavy" >> "$GITHUB_OUTPUT"
+
+      - name: "Free disk space (heavy features)"
+        if: steps.heavy.outputs.heavy == 'true'
+        uses: jlumbroso/free-disk-space@v2.0.0
+        with:
+          tool-cache: false
+
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
 
@@ -182,6 +201,17 @@ jobs:
       - name: "Lint feature and test shell scripts"
         run: shellcheck --severity=error -e SC2148 src/*/*.sh test/*/*.sh
 
+  test-expected-failures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Install latest devcontainer CLI"
+        run: npm install -g @devcontainers/cli
+
+      - name: "Run expected-failure scenarios"
+        run: bash .github/scripts/expected-failure.sh test/_expected-failures/cases.json
+
   ci-status:
     # Single required-check aggregate. Individual test jobs keep their real
     # result (no continue-on-error masking), so any 'failure' here is genuine.
@@ -192,6 +222,7 @@ jobs:
       - test-scenarios
       - test-global
       - shellcheck
+      - test-expected-failures
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -203,6 +234,7 @@ jobs:
           echo "test-scenarios:   ${{ needs.test-scenarios.result }}"
           echo "test-global:      ${{ needs.test-global.result }}"
           echo "shellcheck:       ${{ needs.shellcheck.result }}"
+          echo "expected-failures: ${{ needs.test-expected-failures.result }}"
           if ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}; then
             echo "::error::One or more required jobs failed."
             exit 1
