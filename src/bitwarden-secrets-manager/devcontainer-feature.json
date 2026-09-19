@@ -1,6 +1,6 @@
 {
   "id": "bitwarden-secrets-manager",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "name": "Bitwarden Secrets Manager CLI (bws)",
   "description": "Installs the bitwarden secrets manager CLI (bws) and optionally configures it to use a self-hosted server.",
   "options": {
@@ -16,6 +16,11 @@
     },
     "server_identity":{
       "description": "Provides an identity URL that differs from the default (if in doubt, leave it empty!).",
+      "type": "string",
+      "default": ""
+    },
+    "version":{
+      "description": "Version of bws to install (for example 1.0.0). Defaults to the latest release.",
       "type": "string",
       "default": ""
     }
