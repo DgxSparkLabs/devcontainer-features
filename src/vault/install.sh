@@ -46,10 +46,11 @@ arch_detect() {
 }
 
 github_api_get() {
-    # Resilient GitHub API GET: retries with backoff, validates JSON shape, and
-    # uses GITHUB_TOKEN when present. $1=URL, $2=expected jq type (object|array).
+    # Resilient GitHub API GET: retries with backoff, and only accepts a
+    # response for which the jq predicate $2 is true. This rejects GitHub's
+    # rate-limit error body (also an object). Uses GITHUB_TOKEN when present.
     _url="$1"
-    _type="$2"
+    _valid="$2"
     _attempt=0
     while [ "$_attempt" -lt 4 ]; do
         _attempt=$((_attempt + 1))
@@ -58,7 +59,7 @@ github_api_get() {
         else
             _resp="$(curl -fsSL -H "Accept: application/vnd.github+json" "$_url" 2>/dev/null)" || _resp=""
         fi
-        if [ -n "$_resp" ] && printf '%s' "$_resp" | jq -e "type == \"$_type\"" >/dev/null 2>&1; then
+        if [ -n "$_resp" ] && printf '%s' "$_resp" | jq -e "$_valid" >/dev/null 2>&1; then
             printf '%s' "$_resp"
             return 0
         fi
@@ -76,7 +77,7 @@ fi
 check_packages $REQUIRED_PACKAGES
 
 if [ -z "${VERSION:-}" ]; then
-    RELEASE_JSON="$(github_api_get "https://api.github.com/repos/hashicorp/vault/releases/latest" object)" \
+    RELEASE_JSON="$(github_api_get "https://api.github.com/repos/hashicorp/vault/releases/latest" '(.tag_name // "") | test("[0-9]")')" \
         || error "Could not resolve the latest Vault version from the GitHub API (rate limited?). Pin the 'version' option to install a specific release."
     CURRENT_TAG="$(printf '%s' "$RELEASE_JSON" | jq --raw-output '.tag_name')"
     VERSION="${CURRENT_TAG#v}"
