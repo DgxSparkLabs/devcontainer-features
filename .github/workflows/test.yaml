@@ -56,7 +56,8 @@ jobs:
           all=$(ls -1 src | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
           printf '%s' "$SRC_FILES" > src_files.json
           printf '%s' "$TEST_FILES" > test_files.json
-          changed=$(jq -c -s 'add | map(split("/")[1]) | unique | map(select(length > 0))' \
+          changed=$(jq -c -s --argjson all "$all" \
+            'add | map(split("/")[1]) | map(select(. as $x | ($all | index($x)) != null)) | unique' \
             src_files.json test_files.json)
           echo "all=$all" >> "$GITHUB_OUTPUT"
           echo "changed=$changed" >> "$GITHUB_OUTPUT"

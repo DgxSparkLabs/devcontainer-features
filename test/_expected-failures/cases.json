@@ -21,9 +21,10 @@
     "expect_log": "requires a Debian/Ubuntu base image"
   },
   {
-    "name": "mise-fails-on-non-glibc",
+    "name": "mise-rejects-non-apt",
     "feature": "mise",
-    "image": "mcr.microsoft.com/devcontainers/base:alpine",
-    "options": {}
+    "image": "fedora:latest",
+    "options": {},
+    "expect_log": "requires a Debian/Ubuntu base image"
   }
 ]
