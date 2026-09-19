@@ -52,10 +52,11 @@ arch_detect() {
 }
 
 github_api_get() {
-    # Resilient GitHub API GET: retries with backoff, validates JSON shape, and
-    # uses GITHUB_TOKEN when present. $1=URL, $2=expected jq type (object|array).
+    # Resilient GitHub API GET: retries with backoff, and only accepts a
+    # response for which the jq predicate $2 is true. This rejects GitHub's
+    # rate-limit error body (also an object). Uses GITHUB_TOKEN when present.
     _url="$1"
-    _type="$2"
+    _valid="$2"
     _attempt=0
     while [ "$_attempt" -lt 4 ]; do
         _attempt=$((_attempt + 1))
@@ -64,7 +65,7 @@ github_api_get() {
         else
             _resp="$(curl -fsSL -H "Accept: application/vnd.github+json" "$_url" 2>/dev/null)" || _resp=""
         fi
-        if [ -n "$_resp" ] && printf '%s' "$_resp" | jq -e "type == \"$_type\"" >/dev/null 2>&1; then
+        if [ -n "$_resp" ] && printf '%s' "$_resp" | jq -e "$_valid" >/dev/null 2>&1; then
             printf '%s' "$_resp"
             return 0
         fi
@@ -82,7 +83,7 @@ fi
 check_packages $REQUIRED_PACKAGES
 
 if [ -z "${VERSION:-}" ]; then
-    RELEASES_JSON="$(github_api_get "https://api.github.com/repos/bitwarden/sdk-sm/releases?per_page=100" array)" \
+    RELEASES_JSON="$(github_api_get "https://api.github.com/repos/bitwarden/sdk-sm/releases?per_page=100" 'type == "array" and ([.[] | select((.tag_name // "") | startswith("bws-"))] | length > 0)')" \
         || error "Could not resolve the latest bws version from the GitHub API (rate limited?). Pin the 'version' option to install a specific release."
     CURRENT_TAG="$(printf '%s' "$RELEASES_JSON" | jq --raw-output '[.[] | select(.draft == false) | select(.prerelease == false) | select(.tag_name | startswith("bws-")) | .tag_name][0]')"
     VERSION="${CURRENT_TAG#bws-v}"
