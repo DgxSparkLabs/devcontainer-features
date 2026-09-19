@@ -94,4 +94,8 @@ fi
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
+# Smoke test: fail the build if the binary did not install correctly
+echo "(*) Verifying Bitwarden Secrets Manager CLI installation..."
+bws --version
+
 echo "Done!"

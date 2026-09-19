@@ -70,4 +70,8 @@ fi
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
+# Smoke test: fail the build if the binary did not install correctly
+echo "(*) Verifying Bitwarden CLI installation..."
+bw --version
+
 echo "Done!"

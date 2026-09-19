@@ -87,4 +87,8 @@ install
 rm -rf /var/lib/apt/lists/*
 rm -rf .gnupg
 
+# Smoke test: fail the build if the binary did not install correctly
+echo "(*) Verifying vault installation..."
+vault version
+
 echo "Done!"

@@ -52,4 +52,8 @@ install
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
+# Smoke test: fail the build if the binary did not install correctly
+echo "(*) Verifying mise installation..."
+mise --version
+
 echo "Done!"
