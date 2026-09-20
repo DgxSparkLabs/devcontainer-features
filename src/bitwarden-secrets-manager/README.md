@@ -18,6 +18,7 @@ Installs the bitwarden secrets manager CLI (bws) and optionally configures it to
 | server_base | Provides the base URL of your Bitwarden server, if you host your own server. | string | - |
 | server_api | Provides an API URL that differs from the default (if in doubt, leave it empty!). | string | - |
 | server_identity | Provides an identity URL that differs from the default (if in doubt, leave it empty!). | string | - |
+| version | Version of bws to install (for example 1.0.0). Defaults to the latest release. | string | - |
 
 ## Attribution
 
